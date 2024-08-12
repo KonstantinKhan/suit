@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  version: 0.0.1
+  title: SuitApp API
+  license:
+    name: MIT
+servers:
+  - url: http://localhost
+tags:
+  - name: product
+    description: CRUDS for a product
+paths:
+  /suit/api/v1/product/create:
+    $ref: './spec-suit-api-product.yaml#/paths/~1create'
+
+components:
+  schemas:
+
+    BaseMessage:
+      type: object
+      description: Base class to all requests
+      properties:
+        messageType:
+          description: A discriminator containing the message class type and used to deserialization
+          type: string
+          title: Discriminator
+          example:
+            CreateProductRequest
+      discriminator:
+        propertyName: messageType

@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  version: 0.0.1
+  title: Product
+  description: 'Description of the transport model of the product'
+  license:
+    name: MIT
+servers:
+  - url: "http://localhost"
+
+paths:
+  /create:
+    post:
+      tags:
+        - product
+      summary: Create a new product
+      operationId: createProduct
+      requestBody:
+        description: The request object to create a new product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+        required: true
+      responses:
+        200:
+          description: Not defined
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProductResponse'
+components:
+  schemas:
+
+    CreatableProduct:
+      type: object
+      description: The structure with data about the product to create request
+      properties:
+        name:
+          type: string
+          description: Product name
+          example:
+            Филе куриной грудки
+        calories:
+          type: number
+          description: product calories
+          example:
+            110.0
+        proteins:
+          type: number
+          description: product proteins
+          example:
+            21.0
+        fats:
+          type: number
+          description: product fats
+          example:
+            3.0
+        carbohydrates:
+          type: number
+          description: product carbohydrates
+          example:
+            0.0
+
+    UpdatableProduct:
+      description: Not defined
+      allOf:
+        - $ref: '#/components/schemas/CreatableProduct'
+        - type: object
+          properties:
+            id:
+              type: string
+
+    ResponseProduct:
+      description: Not defined
+      allOf:
+        - $ref: '#/components/schemas/UpdatableProduct'
+
+    CreateProductRequest:
+      allOf:
+        - $ref: './spec-suit-api.yaml#/components/schemas/BaseMessage'
+        - type: object
+          properties:
+            createProduct:
+              $ref: '#/components/schemas/CreatableProduct'
+
+
+    CreateProductResponse:
+      allOf:
+        - $ref: './spec-suit-api.yaml#/components/schemas/BaseMessage'
+        - type: object
+          properties:
+            createdProduct:
+              $ref: '#/components/schemas/ResponseProduct'
