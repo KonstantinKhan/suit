@@ -70,6 +70,7 @@ components:
           properties:
             id:
               type: string
+              example: ab416fb1-be41-456e-ad40-68ca605a44e7
 
     ResponseProduct:
       description: Not defined
@@ -79,6 +80,7 @@ components:
     CreateProductRequest:
       allOf:
         - $ref: './spec-suit-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-suit-api.yaml#/components/schemas/BaseRequest'
         - type: object
           properties:
             createProduct:
@@ -88,6 +90,7 @@ components:
     CreateProductResponse:
       allOf:
         - $ref: './spec-suit-api.yaml#/components/schemas/BaseMessage'
+        - $ref: './spec-suit-api.yaml#/components/schemas/BaseResponse'
         - type: object
           properties:
             createdProduct:

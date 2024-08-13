@@ -28,3 +28,38 @@ components:
             CreateProductRequest
       discriminator:
         propertyName: messageType
+
+    BaseRequest:
+      type: object
+      description: Base class to all requests
+      properties:
+        requestId:
+          type: string
+          description: The id of request entity
+          example: reqID:0001
+
+    BaseResponse:
+      type: object
+      description: Base class to all responses
+      properties:
+        requestId:
+          type: string
+          example: reqID:0001
+        result:
+          type: string
+          enum:
+            - success
+            - error
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestError'
+
+    RequestError:
+      type: object
+      description: Description of request processing error
+      properties:
+        message:
+          type: string
+        field:
+          type: string
