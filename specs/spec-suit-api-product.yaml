@@ -36,31 +36,54 @@ components:
       type: object
       description: The structure with data about the product to create request
       properties:
-        name:
+        productName:
           type: string
           description: Product name
           example:
             Филе куриной грудки
-        calories:
-          type: number
-          description: product calories
-          example:
-            110.0
-        proteins:
-          type: number
-          description: product proteins
-          example:
-            21.0
-        fats:
-          type: number
-          description: product fats
-          example:
-            3.0
-        carbohydrates:
-          type: number
-          description: product carbohydrates
-          example:
-            0.0
+        measure:
+          type: object
+          description: The structure with data about the measure
+          properties:
+            measureValue:
+              type: number
+              description: Measure value
+              example: 100
+            unit:
+              type: object
+              description: The structure with data about the unit
+              properties:
+                unitId:
+                  type: string
+                  example: 046a68e8-2085-4339-8dce-725c5609757a
+                unitValue:
+                  type: string
+                  description: Unit of measurement
+                  example: гр.
+        energyValue:
+          type: object
+          description: The structure with data about energyValue
+          properties:
+            calories:
+              type: number
+              description: product calories
+              example:
+                110.0
+            proteins:
+              type: number
+              description: product proteins
+              example:
+                21.0
+            fats:
+              type: number
+              description: product fats
+              example:
+                3.0
+            carbohydrates:
+              type: number
+              description: product carbohydrates
+              example:
+                0.0
 
     UpdatableProduct:
       description: Not defined
@@ -68,7 +91,7 @@ components:
         - $ref: '#/components/schemas/CreatableProduct'
         - type: object
           properties:
-            id:
+            productId:
               type: string
               example: ab416fb1-be41-456e-ad40-68ca605a44e7
 
