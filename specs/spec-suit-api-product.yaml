@@ -9,6 +9,7 @@ servers:
   - url: "http://localhost"
 
 paths:
+
   /create:
     post:
       tags:
@@ -20,7 +21,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateProductRequest'
+              $ref: '#/components/schemas/ProductCreateRequest'
         required: true
       responses:
         200:
@@ -28,93 +29,334 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateProductResponse'
+                $ref: '#/components/schemas/ProductCreateResponse'
+
+  /read:
+    post:
+      tags:
+        - product
+      summary: Not defined
+      operationId: readProduct
+      requestBody:
+        description: Not defined
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductReadRequest'
+        required: true
+      responses:
+        200:
+          description: Not defined
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductReadResponse'
+
+  /update:
+    post:
+      tags:
+        - product
+      summary: Update a product
+      operationId: updateProduct
+      requestBody:
+        description: The request object to update a product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: Not defined
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductUpdateResponse'
+
+  /delete:
+    post:
+      tags:
+        - product
+      summary: Delete a product
+      operationId: deleteProduct
+      requestBody:
+        description: The request object to delete a product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDeleteRequest'
+        required: true
+      responses:
+        200:
+          description: Not defined
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDeleteResponse'
+
+  /search:
+    post:
+      tags:
+        - product
+      summary: Search for products
+      operationId: searchProducts
+      requestBody:
+        description: The request object to search for products
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductSearchRequest'
+        required: true
+      responses:
+        200:
+          description: Not defined
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchResponse'
+
 components:
   schemas:
 
-    CreatableProduct:
+    IRequest:
       type: object
-      description: The structure with data about the product to create request
+      description: Not defined
       properties:
-        productName:
+        requestType:
           type: string
-          description: Product name
-          example:
-            Филе куриной грудки
+          description: Not defined
+      discriminator:
+        propertyName: requestType
+        mapping:
+          create: '#/components/schemas/ProductCreateRequest'
+          read: '#/components/schemas/ProductReadRequest'
+          update: '#/components/schemas/ProductUpdateRequest'
+          delete: '#/components/schemas/ProductDeleteRequest'
+          search: '#/components/schemas/ProductSearchRequest'
+
+    IResponse:
+      type: object
+      description: Not defined
+      properties:
+        responseType:
+          type: string
+          description: Not defined
+      discriminator:
+        propertyName: responseType
+        mapping:
+          create: '#/components/schemas/ProductCreateResponse'
+          read: '#/components/schemas/ProductReadResponse'
+          update: '#/components/schemas/ProductUpdateResponse'
+          delete: '#/components/schemas/ProductDeleteResponse'
+          search: '#/components/schemas/ProductSearchResponse'
+
+    ProductId:
+      type: string
+      description: Product ID
+      example: 2c1da6c8-d99e-49ff-893d-d2be83193199
+
+    AuthorId:
+      type: string
+      description: Author ID
+      example: 8834f635-5243-4853-88b6-9954b93128c2
+
+    Unit:
+      type: object
+      description: The structure with data about the unit
+      properties:
+        unitId:
+          type: string
+          example: 046a68e8-2085-4339-8dce-725c5609757a
+        unitValue:
+          type: string
+          description: Unit of measurement
+
+    Measure:
+      type: object
+      description: The structure with data about the measure
+      properties:
         measure:
           type: object
           description: The structure with data about the measure
           properties:
+            measureName:
+              type: string
+              description: Measure name
             measureValue:
               type: number
               description: Measure value
-              example: 100
             unit:
-              type: object
-              description: The structure with data about the unit
-              properties:
-                unitId:
-                  type: string
-                  example: 046a68e8-2085-4339-8dce-725c5609757a
-                unitValue:
-                  type: string
-                  description: Unit of measurement
-                  example: гр.
-        energyValue:
-          type: object
-          description: The structure with data about energyValue
-          properties:
-            calories:
-              type: number
-              description: product calories
-              example:
-                110.0
-            proteins:
-              type: number
-              description: product proteins
-              example:
-                21.0
-            fats:
-              type: number
-              description: product fats
-              example:
-                3.0
-            carbohydrates:
-              type: number
-              description: product carbohydrates
-              example:
-                0.0
+              $ref: '#/components/schemas/Unit'
 
-    UpdatableProduct:
+    BaseProduct:
+      type: object
+      description: The structure with data about the product to create request
+      allOf:
+        - $ref: '#/components/schemas/Measure'
+        - type: object
+          properties:
+            productName:
+              type: string
+              description: Product name
+            energyValue:
+              type: object
+              description: The structure with data about energyValue
+              properties:
+                calories:
+                  $ref: '#/components/schemas/Measure'
+                proteins:
+                  $ref: '#/components/schemas/Measure'
+                fats:
+                  $ref: '#/components/schemas/Measure'
+                carbohydrates:
+                  $ref: '#/components/schemas/Measure'
+
+    ProductResponseObject:
       description: Not defined
       allOf:
-        - $ref: '#/components/schemas/CreatableProduct'
+        - $ref: '#/components/schemas/BaseProduct'
+        - type: object
+          description: Not defined
+          properties:
+            productId:
+              $ref: '#/components/schemas/ProductId'
+            ownerId:
+              $ref: '#/components/schemas/AuthorId'
+
+    ProductResponseSimple:
+      allOf:
+        - type: object
+          description: Not defined
+          properties:
+            product:
+              $ref: '#/components/schemas/ProductResponseObject'
+
+    ProductResponseMultiple:
+      allOf:
+        - type: object
+          description: List of found products
+          properties:
+            products:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProductResponseObject'
+
+    FilterMeasure:
+      type: object
+      description: The structure with data about the filter measure
+      properties:
+        min:
+          type: number
+          description: Minimal value
+        max:
+          type: number
+          description: Maximal value
+
+    ProductCreateObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseProduct'
+
+    ProductCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - type: object
+          properties:
+            product:
+              $ref: '#/components/schemas/ProductCreateObject'
+
+    ProductCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ProductResponseSimple'
+
+    ProductReadObject:
+      allOf:
         - type: object
           properties:
             productId:
-              type: string
-              example: ab416fb1-be41-456e-ad40-68ca605a44e7
+              $ref: '#/components/schemas/ProductId'
 
-    ResponseProduct:
-      description: Not defined
+    ProductReadRequest:
       allOf:
-        - $ref: '#/components/schemas/UpdatableProduct'
-
-    CreateProductRequest:
-      allOf:
-        - $ref: './spec-suit-api.yaml#/components/schemas/BaseMessage'
-        - $ref: './spec-suit-api.yaml#/components/schemas/BaseRequest'
+        - $ref: '#/components/schemas/IRequest'
         - type: object
           properties:
-            createProduct:
-              $ref: '#/components/schemas/CreatableProduct'
+            product:
+              $ref: '#/components/schemas/ProductReadObject'
 
-
-    CreateProductResponse:
+    ProductReadResponse:
       allOf:
-        - $ref: './spec-suit-api.yaml#/components/schemas/BaseMessage'
-        - $ref: './spec-suit-api.yaml#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ProductResponseSimple'
+
+    ProductUpdateObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseProduct'
         - type: object
           properties:
-            createdProduct:
-              $ref: '#/components/schemas/ResponseProduct'
+            productId:
+              $ref: '#/components/schemas/ProductId'
+
+    ProductUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - type: object
+          properties:
+            product:
+              $ref: '#/components/schemas/ProductUpdateObject'
+
+    ProductUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ProductResponseSimple'
+
+    ProductDeleteObject:
+      allOf:
+        - type: object
+          properties:
+            productId:
+              $ref: '#/components/schemas/ProductId'
+
+    ProductDeleteRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - type: object
+          properties:
+            product:
+              $ref: '#/components/schemas/ProductDeleteObject'
+
+    ProductDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ProductResponseSimple'
+
+    ProductSearchFilter:
+      type: object
+      description: The structure with data about the search filter
+      properties:
+        searchString:
+          type: string
+          description: Search string
+        caloriesFilter:
+          $ref: '#/components/schemas/FilterMeasure'
+        proteinsFilter:
+          $ref: '#/components/schemas/FilterMeasure'
+        fatsFilter:
+          $ref: '#/components/schemas/FilterMeasure'
+        carbohydratesFilter:
+          $ref: '#/components/schemas/FilterMeasure'
+
+    ProductSearchRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - type: object
+          properties:
+            searchFilter:
+              $ref: '#/components/schemas/ProductSearchFilter'
+
+    ProductSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - type: array
+          items:
+            $ref: '#/components/schemas/ProductResponseMultiple'
