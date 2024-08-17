@@ -167,6 +167,9 @@ components:
         unitId:
           type: string
           example: 046a68e8-2085-4339-8dce-725c5609757a
+        unitName:
+          type: string
+          description: Measure name
         unitValue:
           type: string
           description: Unit of measurement
@@ -179,9 +182,6 @@ components:
           type: object
           description: The structure with data about the measure
           properties:
-            measureName:
-              type: string
-              description: Measure name
             measureValue:
               type: number
               description: Measure value
