@@ -10,5 +10,5 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 rootProject.name = "suit"
-include("suit-food")
 include("suit-transport-openapi")
+include("suit-food-product-be")
