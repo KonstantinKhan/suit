@@ -1,5 +1,7 @@
 package ru.suit.food.common.models
 
-class Measure {
-
-}
+data class Measure(
+    val measureName: String = "",
+    val measureValue: Double = 0.0,
+    val unit: UnitMeasure = UnitMeasure()
+)

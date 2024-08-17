@@ -1,3 +1,5 @@
 package ru.suit.food.common.models
 
-data class EnergyValue()
+data class EnergyValue(
+    val calories: Measure = Measure()
+)
