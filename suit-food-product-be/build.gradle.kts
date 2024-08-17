@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":suit-food-common-be"))
+
     testImplementation(kotlin("test"))
 }
 
