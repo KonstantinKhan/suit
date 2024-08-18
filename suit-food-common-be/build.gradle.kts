@@ -1,12 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.0.10"
-}
-
-group = "ru.suit"
-version = "0.0.1"
-
-repositories {
-    mavenCentral()
+    kotlin("jvm")
 }
 
 dependencies {

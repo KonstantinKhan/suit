@@ -3,15 +3,20 @@ plugins {
     id("org.openapi.generator") version "7.7.0"
 }
 
+sourceSets {
+    main {
+        java.srcDir(layout.buildDirectory.dir("generate-resources/main/src/main/kotlin"))
+    }
+}
+
 openApiGenerate {
     val openApiGroup = "${rootProject.group}.transport"
     generatorName.set("kotlin")
-    outputDir.set("${buildFile.parent}/generated")
     packageName.set(openApiGroup)
     apiPackage.set("$openApiGroup.api")
     modelPackage.set("$openApiGroup.models")
     invokerPackage.set("$openApiGroup.invoker")
-    inputSpec.set("$rootDir/specs/spec-suit-api.yaml")
+    inputSpec.set("$rootDir/specs/spec-suit-api-product.yaml")
 
     globalProperties.apply {
         put("models", "")

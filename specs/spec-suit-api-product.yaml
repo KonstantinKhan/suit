@@ -160,7 +160,7 @@ components:
       description: Author ID
       example: 8834f635-5243-4853-88b6-9954b93128c2
 
-    Unit:
+    UnitMeasure:
       type: object
       description: The structure with data about the unit
       properties:
@@ -185,8 +185,8 @@ components:
             measureValue:
               type: number
               description: Measure value
-            unit:
-              $ref: '#/components/schemas/Unit'
+            unitMeasure:
+              $ref: '#/components/schemas/UnitMeasure'
 
     BaseProduct:
       type: object
