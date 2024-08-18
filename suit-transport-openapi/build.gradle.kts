@@ -31,6 +31,12 @@ openApiGenerate {
             "serializationLibrary" to "kotlinx_serialization"
         )
     )
+
+    typeMappings.set(
+        mapOf(
+            "number" to "Double"
+        )
+    )
 }
 
 tasks {

@@ -178,38 +178,40 @@ components:
       type: object
       description: The structure with data about the measure
       properties:
-        measure:
-          type: object
-          description: The structure with data about the measure
-          properties:
-            measureValue:
-              type: number
-              description: Measure value
-            unitMeasure:
-              $ref: '#/components/schemas/UnitMeasure'
+        measureValue:
+          type: number
+          description: Measure value
+        unitMeasure:
+          $ref: '#/components/schemas/UnitMeasure'
+
+    EnergyValue:
+      type: object
+      description: The structure with data about energyValue
+      properties:
+        calories:
+          $ref: '#/components/schemas/Measure'
+        proteins:
+          $ref: '#/components/schemas/Measure'
+        fats:
+          $ref: '#/components/schemas/Measure'
+        carbohydrates:
+          $ref: '#/components/schemas/Measure'
 
     BaseProduct:
       type: object
       description: The structure with data about the product to create request
       allOf:
-        - $ref: '#/components/schemas/Measure'
+        - type: object
+          properties:
+            measure:
+              $ref: '#/components/schemas/Measure'
         - type: object
           properties:
             productName:
               type: string
               description: Product name
             energyValue:
-              type: object
-              description: The structure with data about energyValue
-              properties:
-                calories:
-                  $ref: '#/components/schemas/Measure'
-                proteins:
-                  $ref: '#/components/schemas/Measure'
-                fats:
-                  $ref: '#/components/schemas/Measure'
-                carbohydrates:
-                  $ref: '#/components/schemas/Measure'
+              $ref: '#/components/schemas/EnergyValue'
 
     ProductResponseObject:
       description: Not defined

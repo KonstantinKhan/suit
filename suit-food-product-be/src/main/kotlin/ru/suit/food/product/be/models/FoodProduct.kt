@@ -1,11 +1,11 @@
 package ru.suit.food.product.be.models
 
-import ru.suit.food.common.models.EnergyValue
-import ru.suit.food.common.models.Measure
+import ru.suit.food.common.models.BeEnergyValue
+import ru.suit.food.common.models.BeMeasure
 
 data class FoodProduct(
     val productId: FoodProductId = FoodProductId.NONE,
     val productName: String = "",
-    val productMeasure: Measure = Measure(),
-    val productEnergyValue: EnergyValue = EnergyValue()
+    val productMeasure: BeMeasure = BeMeasure(),
+    val productEnergyValue: BeEnergyValue = BeEnergyValue()
 )

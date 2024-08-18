@@ -1,6 +1,6 @@
 package ru.suit.food.common.models
 
-data class Measure(
+data class BeMeasure(
     val measureValue: Double = 0.0,
-    val unit: UnitMeasure = UnitMeasure()
+    val unit: BeUnitMeasure = BeUnitMeasure()
 )

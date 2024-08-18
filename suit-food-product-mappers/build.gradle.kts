@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":suit-food-common-be"))
     implementation(project(":suit-food-product-be"))
     implementation(project(":suit-transport-openapi"))
 
