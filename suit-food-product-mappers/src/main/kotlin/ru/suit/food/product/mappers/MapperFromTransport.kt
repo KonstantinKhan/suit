@@ -1,4 +1,4 @@
 package ru.suit.food.product.mappers
 
-class MapperFromTransport {
-}
+import ru.suit.food.product.be.FoodProductContext
+

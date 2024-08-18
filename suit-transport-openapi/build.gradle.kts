@@ -9,7 +9,7 @@ openApiGenerate {
     outputDir.set("${buildFile.parent}/generated")
     packageName.set(openApiGroup)
     apiPackage.set("$openApiGroup.api")
-    modelPackage.set("$openApiGroup.invoker")
+    modelPackage.set("$openApiGroup.models")
     invokerPackage.set("$openApiGroup.invoker")
     inputSpec.set("$rootDir/specs/spec-suit-api.yaml")
 
@@ -22,13 +22,14 @@ openApiGenerate {
         mapOf(
             "dateLibrary" to "string",
             "enumPropertyNaming" to "UPPERCASE",
-            "collectionType" to "list"
+            "collectionType" to "list",
+            "serializationLibrary" to "kotlinx_serialization"
         )
     )
 }
 
 tasks {
-    withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).forEach {
-        it.dependsOn(openApiGenerate)
+    compileKotlin {
+        dependsOn(openApiGenerate)
     }
 }
