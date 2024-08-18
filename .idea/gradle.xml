@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/suit-food-common-be" />
             <option value="$PROJECT_DIR$/suit-food-product-be" />
+            <option value="$PROJECT_DIR$/suit-food-product-mappers" />
             <option value="$PROJECT_DIR$/suit-transport-openapi" />
           </set>
         </option>

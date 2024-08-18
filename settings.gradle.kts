@@ -13,3 +13,4 @@ rootProject.name = "suit"
 include("suit-transport-openapi")
 include("suit-food-product-be")
 include("suit-food-common-be")
+include("suit-food-product-mappers")
