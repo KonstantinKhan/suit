@@ -1,11 +1,14 @@
 plugins {
     kotlin("jvm")
-    kotlin("plugin.serialization") version "2.0.10"
+//    kotlin("plugin.serialization") version "2.0.10"
     id("org.openapi.generator") version "7.7.0"
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
+
 }
 
 sourceSets {
@@ -33,7 +36,7 @@ openApiGenerate {
             "dateLibrary" to "string",
             "enumPropertyNaming" to "UPPERCASE",
             "collectionType" to "list",
-            "serializationLibrary" to "kotlinx_serialization"
+            "serializationLibrary" to "jackson"
         )
     )
 
@@ -42,6 +45,8 @@ openApiGenerate {
             "number" to "Double"
         )
     )
+
+    languageSpecificPrimitives.set(listOf("Double"))
 }
 
 tasks {
