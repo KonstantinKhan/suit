@@ -164,13 +164,13 @@ components:
       type: object
       description: The structure with data about the unit
       properties:
-        unitId:
+        unitMeasureId:
           type: string
           example: 046a68e8-2085-4339-8dce-725c5609757a
-        unitName:
+        unitMeasureName:
           type: string
           description: Measure name
-        unitValue:
+        unitMeasureValue:
           type: string
           description: Unit of measurement
 
