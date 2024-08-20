@@ -5,6 +5,7 @@ import ru.suit.food.common.models.BeMeasure
 
 data class FoodProduct(
     val productId: FoodProductId = FoodProductId.NONE,
+    val ownerId: OwnerId = OwnerId.NONE,
     val productName: String = "",
     val productMeasure: BeMeasure = BeMeasure(),
     val productEnergyValue: BeEnergyValue = BeEnergyValue()

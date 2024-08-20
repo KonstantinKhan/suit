@@ -359,6 +359,4 @@ components:
     ProductSearchResponse:
       allOf:
         - $ref: '#/components/schemas/IResponse'
-        - type: array
-          items:
-            $ref: '#/components/schemas/ProductResponseMultiple'
+        - $ref: '#/components/schemas/ProductResponseMultiple'

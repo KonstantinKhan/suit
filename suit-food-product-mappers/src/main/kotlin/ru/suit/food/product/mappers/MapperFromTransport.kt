@@ -34,7 +34,7 @@ private fun ProductCreateObject.toInternal(): FoodProduct = FoodProduct(
 
 private fun Measure.toInternal(): BeMeasure = BeMeasure(
     measureValue = this.measureValue ?: 0.0,
-    unit = this.unitMeasure?.toInternal() ?: BeUnitMeasure()
+    unitMeasure = this.unitMeasure?.toInternal() ?: BeUnitMeasure()
 )
 
 private fun UnitMeasure.toInternal(): BeUnitMeasure = BeUnitMeasure(
