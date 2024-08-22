@@ -7,7 +7,7 @@ import ru.suit.food.product.mappers.fromTransport
 import ru.suit.transport.models.ProductSearchFilter
 import ru.suit.transport.models.ProductSearchRequest
 
-class FilterTestSuccess: ShouldSpec({
+class FilterRequestSuccess: ShouldSpec({
     should("return correct filter request") {
         val filterRequest = ProductSearchRequest(
             requestType = "search",
